@@ -1,5 +1,5 @@
 import os
-#os.system("easy_install morfeusz2-0.4.0-py3.6-win-amd64.egg")
+os.system("sudo apt install python3-morfeusz2")
 
 from app import app
 
