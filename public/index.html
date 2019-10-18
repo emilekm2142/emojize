@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<head>
+    <title>Zmień dowolny tekst na rakowe emoji! - Hajzerize</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+</head>
+<body>
+    <section class="container">
+        <h1>Zmień dowolny tekst na rakowe emoji!</h1>
+<form action="translate" method="POST">
+        <div class="form-group">
+<textarea name="v" class="form-control">
+{{input}}
+</textarea>
+</div>
+<input type="submit" value="Zemojizuj!" class="btn btn-primary" style="width:100%">
+
+</form>
+{% if data %}
+<div class="form-group" style="margin-top:25px;">
+<textarea class="form-control">
+{{data}}
+</textarea>
+</div>
+{% endif %}
+</section>
+</body>
