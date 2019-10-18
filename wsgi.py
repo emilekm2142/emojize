@@ -1,5 +1,5 @@
 import os
-os.system("sudo apt install python3-morfeusz2")
+os.system("apt install python3-morfeusz2")
 
 from app import app
 
