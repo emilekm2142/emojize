@@ -22,19 +22,19 @@ def translate(text:str)->str:
         current_token_index+=1
         current_token = token[2][0]
         constrained_words = ["ten", "ów", "że:c"]
-        max_number=5
+        max_number=2
         for w in constrained_words:
             if w in current_lemmas:
                 max_number=1
                 break
-        amount = random.randint(1,5)
+        amount = random.randint(1,max_number)
         emojis = [] 
         errors = 0
         while len(emojis)<amount and len(current_lemmas)>0:
             random_lemma = current_lemmas[0]
             
             try:
-                emojis+=[get_random_emoji(dictionary[random_lemma]["emoji_after"])]
+                emojis+=[get_random_emoji(dictionary[random_lemma]["combo"])]
             except KeyError:
                 errors+=1
                 current_lemmas.remove(random_lemma)

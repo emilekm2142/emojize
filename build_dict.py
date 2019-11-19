@@ -8,15 +8,16 @@ output_file = "dict.json"
 for filename in glob.glob(f"{dict_data_folder}/*"):
     print(filename)
     dict_entry = {}
+    if (not os.path.isfile(filename)): continue
     with open(filename, encoding="utf-8") as data_file:
         content = data_file.read().replace(".", "").replace(",", "").replace(":","").replace("-","").replace("!","").replace("?","")
         for group in emoji_pattern.findall(content):
             word = group[0]
-            if word in ['i', 'lub', 'też', "się", "sie"]: continue
+            if word in ['i', 'lub', 'też', "się", "sie", "ale", "nad"]: continue
             emojis = emoji.demojize(group[1])
             #warunki
             emojis_list =  list(dict.fromkeys([x for x in emojis.split(":") if len(x)>1 and 'keycap' not in x]))
-          
+            emoji_combo =  [x for x in emojis.split(":") if len(x)>1 and 'keycap' not in x]
             lemma = morf.analyse(word);
          
             for meaning in lemma:
@@ -27,9 +28,12 @@ for filename in glob.glob(f"{dict_data_folder}/*"):
                 if base_word in dict:
                     dict[base_word]["emoji_after"]+=copy.deepcopy(emojis_list)
                     dict[base_word]["emoji_after"]=list(dict.fromkeys( dict[base_word]["emoji_after"]))
+                    
+                    dict[base_word]["combo"]+=copy.deepcopy(emoji_combo)
                 else:
                     dict_entry["emoji_after"] = emojis_list
                     dict[base_word] = copy.deepcopy(dict_entry)
+                    dict[base_word]["combo"]=copy.deepcopy(emoji_combo)
 with open(output_file, "w+", encoding="utf-8") as f:             
     json.dump(dict,f, ensure_ascii=False)
          
